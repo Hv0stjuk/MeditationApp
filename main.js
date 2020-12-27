@@ -27,7 +27,7 @@ const app = () => {
   timeSelect.forEach(option =>{
     option.addEventListener('click', function() {
       fakeDuration = this.getAttribute('data-time');
-      timeDisplay.textContent = `${Math.floor(fakeDuration / 60)}:${Math.floor(fakeDuration % 60)}`;
+      timeDisplay.textContent = `${addZero(Math.floor(fakeDuration / 60))}:${addZero(Math.floor(fakeDuration % 60))}`;
     });
   });
   
@@ -51,7 +51,7 @@ const app = () => {
     let progress = outlineLength - (currentTime / fakeDuration) * outlineLength;
     
     outline.style.strokeDashoffset = progress;
-    timeDisplay.textContent = `${minutes}:${seconds}`;
+    timeDisplay.textContent = `${addZero(minutes)}:${addZero(seconds)}`;
 
     if (currentTime >= fakeDuration) {
       song.pause();
@@ -60,5 +60,10 @@ const app = () => {
       video.pause();
     }
   };
+
+  function addZero(time) {
+    return (time < 10 ? "0" : "") + time;
+  }
+
 };
 app();
